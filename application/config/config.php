@@ -24,7 +24,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |
 */
 // $config['base_url'] = 'http://192.168.43.203/cbt-malela-v2/';
-$config['base_url'] = 'http://localhost/cbt/';
+$config['base_url'] = 'http://localhost:8080/cbt/';
 
 /*
 |--------------------------------------------------------------------------

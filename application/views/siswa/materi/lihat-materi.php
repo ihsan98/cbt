@@ -23,6 +23,24 @@
                         <hr>
                         <p style="white-space: pre-line;"><?= $materi->text_materi; ?></p>
                         <hr>
+
+                        <?php if(count($semua_video) > 0) { ?>
+                        <div class="row">
+                            <?php foreach($semua_video as $row) { ?>
+                            <div class="col-lg-3 mt-2 mb-4">
+                                <div class="card" style="width: 18rem;">
+                                    <img class="card-img-top" src="https://img.youtube.com/vi/<?php echo $row->kode_video; ?>/0.jpg" alt="thumbnail" style="width: 100%; height: auto;">
+                                    <div class="card-body">
+                                        <h6 class="card-title"><?php echo $row->judul_video; ?></h6>
+                                        <p class="card-text"><?php echo substr($row->deskripsi_video, 0, 100) . '...'; ?></p>
+                                        <a href="<?php echo site_url('siswa/lihat_video/' . encrypt_url($row->id_video)); ?>" class="btn btn-primary">Lihat Video</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php } ?>
+                        </div>
+                        <?php } ?>
+
                         <?php if ($file) : ?>
                             <div class="row">
                                 <?php foreach ($file as $f) : ?>

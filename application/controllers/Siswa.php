@@ -229,9 +229,72 @@ class Siswa extends CI_Controller
         $data['mapel'] = $this->db->get_where('mapel', ['id_mapel' => $data['materi']->mapel])->row();
         $data['kelas'] = $this->db->get_where('kelas', ['id_kelas' => $data['materi']->kelas])->row();
 
+        $semua_video = $this->db->get_where('video', array('id_materi' => $data['materi']->id_materi))->result();
+
+        $data['semua_video'] = $semua_video;
+
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar/siswa', $data);
         $this->load->view('siswa/materi/lihat-materi', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function lihat_video($id_video = '')
+    {
+        // MENU DATA
+        $data['dashboard'] = [
+            'menu' => '',
+            'expanded' => 'false'
+        ];
+        $data['menu_materi'] = [
+            'menu' => 'active',
+            'expanded' => 'true',
+        ];
+        $data['menu_tugas'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_ujian'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_profile'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+
+        $q_video = $this->db->get_where('v_video', array('id_video' => decrypt_url($id_video)));
+
+        if($q_video->num_rows() === 0) {
+            redirect('siswa/materi');
+        }
+
+        $r_video = $q_video->row();
+
+        $siswa = $this->db->get_where('siswa', ['id_siswa' => $this->session->userdata('id')])->row();
+        $data['materi'] = $this->db->get_where('materi', ['id_materi' => $r_video->id_materi, 'kelas' => $siswa->kelas])->row();
+        $data['guru'] = $this->db->get_where('guru', ['id_guru' => $data['materi']->guru])->row();
+        $data['file'] = $this->db->get_where('file', ['kode_file' => $data['materi']->kode_materi])->result();
+
+        $siswa_materi_where = [
+            'materi' => $data['materi']->kode_materi,
+            'siswa' => $this->session->userdata('id')
+        ];
+
+        $siswa_materi = $this->db->get_where('materi_siswa', $siswa_materi_where)->row();
+        if ($siswa_materi) {
+            $this->db->delete('materi_siswa', $siswa_materi_where);
+        }
+
+        $data['siswa'] = $siswa;
+        $data['mapel'] = $this->db->get_where('mapel', ['id_mapel' => $data['materi']->mapel])->row();
+        $data['kelas'] = $this->db->get_where('kelas', ['id_kelas' => $data['materi']->kelas])->row();
+        $data['semua_materi'] = $this->db->get_where('materi', ['kelas' => $siswa->kelas])->result();
+        $data['video'] = $r_video;
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar/siswa', $data);
+        $this->load->view('siswa/materi/lihat-video', $data);
         $this->load->view('templates/footer');
     }
 

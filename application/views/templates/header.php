@@ -44,6 +44,67 @@
     <!-- FONT AWESOME -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
 
+    <style>
+        .wrap-question {
+            position: absolute;
+            background: #ffffff;
+            padding: 30px;
+            overflow: scroll;
+            height: 400px;
+            width: calc(100% - 30px);
+            opacity: 0.95;
+            z-index: 5;
+        }
+
+        .wrap-question.show {
+            z-index: 5;
+        }
+
+        .question {
+            display: none;
+            height: calc(100% - 80px);
+            position: absolute;
+            width: calc(100% - 60px);
+            z-index: 6;
+        }
+
+        .question.show {
+            display: block; 
+        }
+
+        .nav-question {
+            bottom: 0;
+            position: absolute;
+            text-align: center;
+            width: calc(100% - 60px);
+        }
+
+        .nav-question ul li {
+            cursor: pointer;
+            background: #2e2e2e;
+            color: #ffffff;
+            font-weight: bold;
+            width: 28.8px;
+            padding: 4px 0;
+            border-radius: 50%;
+            margin: 0 2px;
+            display: inline-block;
+        }
+
+        .nav-question ul li:hover {
+            opacity: 0.9;
+        }
+
+        .nav-question ul li.current {
+            background: orange;
+            color: #2e2e2e;
+        }
+
+        .nav-question ul li.active {
+            background: green;
+            color: #2e2e2e;
+        }
+    </style>
 </head>
 
 <body class="sidebar-noneoverflow">
