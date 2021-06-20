@@ -7,8 +7,8 @@
                     <div class="row">
                         <div class="col-lg-7">
                             <div class="widget-heading">
-                                <h5 class="">Guru</h5>
-                                <a href="javascript:void(0)" class="btn btn-primary mt-3" data-toggle="modal" data-target="#tambah_guru">Tambah Guru</a>
+                                <h5 class="">Dosen</h5>
+                                <a href="javascript:void(0)" class="btn btn-primary mt-3" data-toggle="modal" data-target="#tambah_guru">Tambah Dosen</a>
                                 <!-- <a href="javascript:void(0)" class="btn btn-primary mt-3 ml-2" data-toggle="modal" data-target="#import_guru">Import Exel</a> -->
                             </div>
                             <div class="table-responsive">
@@ -60,10 +60,10 @@
     </div> -->
     <div class="footer-wrapper">
         <div class="footer-section f-section-1">
-            <p class="">Copyright © 2021 <a target="_blank" href="http://bit.ly/demo-abdul">Abduloh Malela</a>, All rights reserved. <a href="https://freepik.com" target="_blank" class="text-primary">Illustration by Freepik</a></p>
+            <p class="">Copyright © 2021 <a target="_blank" href="http://www.instagram.com/ikhsa.an">Ihsan</a>, All rights reserved.</p>
         </div>
         <div class="footer-section f-section-2">
-            <p class="">CBT-MALELA v 1.1</p>
+            <p class="">SIRO</p>
         </div>
     </div>
 </div>
@@ -76,7 +76,7 @@
         <form action="" method="POST">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="tambah_guruLabel">Tambah guru</h5>
+                    <h5 class="modal-title" id="tambah_guruLabel">Tambah Dosen</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         x
                     </button>
@@ -115,14 +115,14 @@
         <form action="<?= base_url('app/edit_guru'); ?>" method="POST">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="edit_guruLabel">Edit guru</h5>
+                    <h5 class="modal-title" id="edit_guruLabel">Edit Dosen</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         x
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="">Nama guru</label>
+                        <label for="">Nama Dosen</label>
                         <input type="hidden" name="id_guru" id="id_guru" class="form-control">
                         <input type="text" name="nama_guru" id="nama_guru" class="form-control">
                     </div>

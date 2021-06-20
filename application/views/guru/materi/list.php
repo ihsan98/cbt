@@ -16,7 +16,7 @@
                                     <thead>
                                         <tr>
                                             <th>Nama</th>
-                                            <th>Mapel</th>
+                                            <th>Materi</th>
                                             <th>Kelas</th>
                                             <th>Opsi</th>
                                         </tr>
@@ -75,10 +75,10 @@
     </div> -->
     <div class="footer-wrapper">
         <div class="footer-section f-section-1">
-            <p class="">Copyright © 2021 <a target="_blank" href="http://bit.ly/demo-abdul" class="text-primary">Abduloh Malela</a></p>
+            <p class="">Copyright © 2021 <a target="_blank" href="http://www.instagram.com/ikhsa.an" class="text-primary">Ihsan</a></p>
         </div>
         <div class="footer-section f-section-2">
-            <p class="">CBT-MALELA v 1.1</p>
+            <p class="">SIRO</p>
         </div>
     </div>
 </div>

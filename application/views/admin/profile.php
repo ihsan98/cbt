@@ -56,10 +56,10 @@
     </div>
     <div class="footer-wrapper">
         <div class="footer-section f-section-1">
-            <p class="">Copyright © 2021 <a target="_blank" href="http://bit.ly/demo-abdul">Abduloh Malela</a>, All rights reserved. <a href="https://freepik.com" target="_blank" class="text-primary">Illustration by Freepik</a></p>
+            <p class="">Copyright © 2021 <a target="_blank" href="http://www.instagram.com/ikhsa.an">Ihsan</a>, Hehehe</a></p>
         </div>
         <div class="footer-section f-section-2">
-            <p class="">CBT-MALELA v 1.1</p>
+            <p class="">SIRO 1.1</p>
         </div>
     </div>
 </div>

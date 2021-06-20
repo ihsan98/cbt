@@ -146,7 +146,7 @@
             <div class="form-form-wrap">
                 <div class="form-container">
                     <div class="form-content">
-                        <h1 class="">Daftar Akun<br /><span class="brand-name">CBT Malela</span></h1>
+                        <h1 class="">Daftar Akun<br /><span class="brand-name">SIRO</span></h1>
                         <p class="signup-link">Sudah punya akun? <a href="<?= base_url('auth'); ?>">Log in</a></p>
                         <form action="<?= base_url('auth/register'); ?>" method="POST" class="text-left" id="myform">
                             <div class="form">

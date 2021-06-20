@@ -8,7 +8,7 @@
                         <?php $guru = $this->db->get_where('guru', ['id_guru' => $this->session->userdata('id')])->row(); ?>
                         <img src="<?= base_url('assets/app-assets/user/') . $guru->avatar; ?>" alt="avatar" class="bg-white">
                         <h6 class=""><?= $guru->nama_guru; ?></h6>
-                        <p class="">Guru CBT-Malela</p>
+                        <p class="">Dosen SIRO</p>
                     </div>
                 </div>
                 <div class="shadow-bottom"></div>
@@ -48,6 +48,19 @@
                                     <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
                                 </svg>
                                 <span>Tugas / Quiz</span>
+                            </div>
+                        </a>
+                    </li>
+
+                    <!-- Video Materi -->
+                    <li class="menu <?= $menu_materi['menu']; ?>">
+                        <a href="<?= base_url('guru/materi'); ?>" aria-expanded="<?= $menu_materi['expanded']; ?>" class="dropdown-toggle">
+                            <div class="">
+                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
+                                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                                </svg>
+                                <span>Video Materi</span>
                             </div>
                         </a>
                     </li>

@@ -10,7 +10,7 @@
                             <circle cx="12" cy="7" r="4"></circle>
                         </svg>
                     </div>
-                    <h5 class="info-heading mt-4 text-center">Jumlah Data Guru</h5>
+                    <h5 class="info-heading mt-4 text-center">Jumlah Data Dosen</h5>
                     <div class="widget-content">
                         <div class="w-content" style="padding: 0;">
                             <div class="">
@@ -32,13 +32,13 @@
                             <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                         </svg>
                     </div>
-                    <h5 class="info-heading mt-4 text-center">Jumlah Data Siswa</h5>
+                    <h5 class="info-heading mt-4 text-center">Jumlah Data Mahasiswa</h5>
                     <div class="widget-content">
                         <div class="w-content" style="padding: 0;">
                             <div class="">
                                 <p class="task-left"><?= count($siswa); ?></p>
-                                <p class="task-completed"><span><?= count($siswa_aktif); ?> Siswa</span> Aktif</p>
-                                <p class="task-hight-priority"><span><?= count($siswa_tidak_aktif); ?> Siswa</span> Tidak Aktif</p>
+                                <p class="task-completed"><span><?= count($siswa_aktif); ?> Mahasiswa</span> Aktif</p>
+                                <p class="task-hight-priority"><span><?= count($siswa_tidak_aktif); ?> Mahasiswa</span> Tidak Aktif</p>
                             </div>
                         </div>
                     </div>
@@ -73,12 +73,12 @@
                             <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
                         </svg>
                     </div>
-                    <h5 class="info-heading mt-4 text-center">Jumlah Data Mapel</h5>
+                    <h5 class="info-heading mt-4 text-center">Jumlah Data Materi</h5>
                     <div class="widget-content">
                         <div class="w-content" style="padding: 0;">
                             <div class="">
                                 <p class="task-left"><?= count($mapel); ?></p>
-                                <p class="task-completed"><span><?= count($mapel); ?> Mapel</span> Aktif</p>
+                                <p class="task-completed"><span><?= count($mapel); ?> Materi</span> Aktif</p>
                             </div>
                         </div>
                     </div>
@@ -89,10 +89,10 @@
 
     <div class="footer-wrapper">
         <div class="footer-section f-section-1">
-            <p class="">Copyright © 2021 <a target="_blank" href="http://bit.ly/demo-abdul">Abduloh Malela</a>, All rights reserved. <a href="https://freepik.com" target="_blank" class="text-primary">Illustration by Freepik</a></p>
+            <p class="">Copyright © 2021 <a target="_blank" href="http://www.instagram.com/ikhsa.an">Ihsan</a>, Hehehe.</p>
         </div>
         <div class="footer-section f-section-2">
-            <p class="">CBT-MALELA v 1.1</p>
+            <p class="">SIRO 1.1</p>
         </div>
     </div>
 </div>

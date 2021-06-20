@@ -11,7 +11,7 @@
                                 <h5 class="text-center">My Profile</h5>
                                 <img src="<?= base_url('assets/app-assets/user/') . $siswa->avatar; ?>" class="img-thumbnail mt-2" width="200px" alt="">
                                 <h6 class="mt-4"><?= $siswa->nama_siswa; ?></h6>
-                                <p style="margin-top: -10px;">SISWA CBT-MALELA</p>
+                                <p style="margin-top: -10px;">Mahasiswa SIRO</p>
                                 <div class="d-flex justify-content-center text-center">
                                     <table cellpadding="2" class="text-center">
                                         <tr>
@@ -57,10 +57,10 @@
     </div>
     <div class="footer-wrapper">
         <div class="footer-section f-section-1">
-            <p class="">Copyright © 2021 <a target="_blank" href="http://bit.ly/demo-abdul" class="text-primary">Abduloh Malela</a></p>
+            <p class="">Copyright © 2021 <a target="_blank" href="http://www.instagram.com/ikhsa.an" class="text-primary">Ihsan</a></p>
         </div>
         <div class="footer-section f-section-2">
-            <p class="">CBT-MALELA v 1.1</p>
+            <p class="">SIRO</p>
         </div>
     </div>
 </div>

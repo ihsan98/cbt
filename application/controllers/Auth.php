@@ -404,49 +404,49 @@ class Auth extends CI_Controller
 
                 $this->db->insert('user_token', $user_token);
 
-                // KIRIM EMAIL
-                // $email_app = $this->db->get('admin')->row();
-                // $config = [
-                //     'protocol' => 'smtp',
-                //     'smtp_host' => 'ssl://smtp.googlemail.com',
-                //     'smtp_user' => "$email_app->email",
-                //     'smtp_pass' => "$email_app->pm",
-                //     'smtp_port' => 465,
-                //     'mailtype' => 'html',
-                //     'charset' => 'utf-8',
-                //     'newline' => "\r\n"
-                // ];
-                // $this->email->initialize($config);
+                // KIRIM EMAIL   (bintang)
+                $email_app = $this->db->get('admin')->row();
+                $config = [
+                    'protocol' => 'smtp',
+                    'smtp_host' => 'ssl://smtp.googlemail.com',
+                    'smtp_user' => "$email_app->email",
+                    'smtp_pass' => "$email_app->pm",
+                    'smtp_port' => 465,
+                    'mailtype' => 'html',
+                    'charset' => 'utf-8',
+                    'newline' => "\r\n"
+                ];
+                $this->email->initialize($config);
 
-                // $this->email->set_newline("\r\n");
+                $this->email->set_newline("\r\n");
 
-                // $this->load->library('email', $config);
+                $this->load->library('email', $config);
 
-                // $this->email->from("$email_app->email", 'CBT Malela');
-                // $this->email->to($email);
+                $this->email->from("$email_app->email", 'Admin SIO');
+                $this->email->to($email);
 
-                // $this->email->subject('Aktivasi Akun');
-                // $this->email->message('
-                //     <div style="color: #000; padding: 10px;">
-                //         <div style="font-family: `Segoe UI`, Tahoma, Geneva, Verdana, sans-serif; font-size: 20px; color: #1C3FAA; font-weight: bold;">
-                //             CBT Malela
-                //         </div>
-                //         <small style="color: #000;">SIRO by Ihsan</small>
-                //         <br>
-                //         <p style="font-family: `Segoe UI`, Tahoma, Geneva, Verdana, sans-serif; color: #000;">Hallo ' . $this->input->post('nama') . ' <br>
-                //             <span style="color: #000;">Anda telah Melakukan Pendaftaran ke CBT MALELA sebagai SISWA. Silahkan lakukan aktivasi dengan cara mengklik tombol aktivasi</span><br>
-                //             </p>
-                //         <a href="' . base_url() . 'auth/verify?email=' . $email . '&token=' . $token .  '" style="display: inline-block; width: 100px; height: 30px; background: #1C3FAA; color: #fff; text-decoration: none; border-radius: 5px; text-align: center; line-height: 30px; font-family: `Segoe UI`, Tahoma, Geneva, Verdana, sans-serif;">
-                //             aktivasi        
-                //         </a>
-                //     </div>
-                // ');
+                $this->email->subject('Aktivasi Akun');
+                $this->email->message('
+                    <div style="color: #000; padding: 10px;">
+                        <div style="font-family: `Segoe UI`, Tahoma, Geneva, Verdana, sans-serif; font-size: 20px; color: #1C3FAA; font-weight: bold;">
+                            SIO
+                        </div>
+                        <small style="color: #000;">SIRO by Ihsan</small>
+                        <br>
+                        <p style="font-family: `Segoe UI`, Tahoma, Geneva, Verdana, sans-serif; color: #000;">Hallo ' . $this->input->post('nama') . ' <br>
+                            <span style="color: #000;">Anda telah Melakukan Pendaftaran Kelas SIO Sebagai Mahasiswa. Silahkan lakukan aktivasi dengan cara mengklik tombol aktivasi</span><br>
+                            </p>
+                        <a href="' . base_url() . 'auth/verify?email=' . $email . '&token=' . $token .  '" style="display: inline-block; width: 100px; height: 30px; background: #1C3FAA; color: #fff; text-decoration: none; border-radius: 5px; text-align: center; line-height: 30px; font-family: `Segoe UI`, Tahoma, Geneva, Verdana, sans-serif;">
+                            aktivasi        
+                        </a>
+                    </div>
+                ');
 
-                // if (!$this->email->send()) {
-                //     $this->db->delete('user_token', ['email' => $email]);
-                //     echo $this->email->print_debugger();
-                //     die();
-                // } else {
+                if (!$this->email->send()) {
+                    $this->db->delete('user_token', ['email' => $email]);
+                    echo $this->email->print_debugger();
+                    die();
+                } else {   //sampai sini (bintang)
                     $this->db->insert('siswa', $data_siswa);
                     $this->session->set_flashdata('pesan', "
                         swal({
@@ -457,7 +457,7 @@ class Auth extends CI_Controller
                             })
                         ");
                     redirect(base_url());
-                // }
+                 }
             } else {
                 $data_guru = [
                     'nama_guru' => $this->input->post('nama'),
@@ -496,19 +496,19 @@ class Auth extends CI_Controller
 
                 $this->load->library('email', $config);
 
-                $this->email->from("$email_app->email", 'CBT Malela');
+                $this->email->from("$email_app->email", 'Admin SIRO');
                 $this->email->to($email);
 
                 $this->email->subject('Aktivasi Akun');
                 $this->email->message('
                     <div style="color: #000; padding: 10px;">
                         <div style="font-family: `Segoe UI`, Tahoma, Geneva, Verdana, sans-serif; font-size: 20px; color: #1C3FAA; font-weight: bold;">
-                            CBT Malela
+                            SIRO
                         </div>
                         <small style="color: #000;">SIRO by Ihsan</small>
                         <br>
                         <p style="font-family: `Segoe UI`, Tahoma, Geneva, Verdana, sans-serif; color: #000;">Hallo ' . $this->input->post('nama') . ' <br>
-                            <span style="color: #000;">Anda telah Melakukan Pendaftaran ke CBT MALELA sebagai GURU. Silahkan lakukan aktivasi dengan cara mengklik tombol aktivasi</span><br>
+                            <span style="color: #000;">Anda telah Melakukan Pendaftaran ke SIRO sebagai Dosen Pengajar. Silahkan lakukan aktivasi dengan cara mengklik tombol aktivasi</span><br>
                         </p>
                         <a href="' . base_url() . 'auth/verify?email=' . $email . '&token=' . $token .  '" style="display: inline-block; width: 100px; height: 30px; background: #1C3FAA; color: #fff; text-decoration: none; border-radius: 5px; text-align: center; line-height: 30px; font-family: `Segoe UI`, Tahoma, Geneva, Verdana, sans-serif;">
                             aktivasi        
@@ -674,14 +674,14 @@ class Auth extends CI_Controller
 
                 $this->load->library('email', $config);
 
-                $this->email->from("$email_app->email", 'CBT Malela');
+                $this->email->from("$email_app->email", 'Admin SIRO');
                 $this->email->to($email);
 
                 $this->email->subject('Lupa Password');
                 $this->email->message('
                     <div style="color: #000; padding: 10px;">
                         <div style="font-family: `Segoe UI`, Tahoma, Geneva, Verdana, sans-serif; font-size: 20px; color: #1C3FAA; font-weight: bold;">
-                            CBT Malela
+                           SIRO
                         </div>
                         <small style="color: #000;">SIRO by Ihsan</small>
                         <br>
@@ -742,14 +742,14 @@ class Auth extends CI_Controller
 
                 $this->load->library('email', $config);
 
-                $this->email->from("$email_app->email", 'CBT Malela');
+                $this->email->from("$email_app->email", 'Admin SIRO');
                 $this->email->to($email);
 
                 $this->email->subject('Lupa Password');
                 $this->email->message('
                     <div style="color: #000; padding: 10px;">
                         <div style="font-family: `Segoe UI`, Tahoma, Geneva, Verdana, sans-serif; font-size: 20px; color: #1C3FAA; font-weight: bold;">
-                            CBT Malela
+                            SIRO
                         </div>
                         <small style="color: #000;">SIRO by Ihsan</small>
                         <br>

@@ -48,10 +48,10 @@
                         </a>
                         <ul class="collapse submenu list-unstyled <?= $master['collapse']; ?>" id="components" data-parent="#accordionExample">
                             <li class="<?= $sub_master['siswa']; ?>">
-                                <a href="<?= base_url('app/siswa'); ?>"> Siswa </a>
+                                <a href="<?= base_url('app/siswa'); ?>"> Mahasiswa </a>
                             </li>
                             <li class="<?= $sub_master['guru']; ?>">
-                                <a href="<?= base_url('app/guru'); ?>"> Guru </a>
+                                <a href="<?= base_url('app/guru'); ?>"> Dosen </a>
                             </li>
                         </ul>
                     </li>
@@ -73,7 +73,7 @@
                                     <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
                                     <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
                                 </svg>
-                                <span>Mata Kuliah</span>
+                                <span>Materi</span>  <!-- Ganti -->
                             </div>
                         </a>
                     </li>

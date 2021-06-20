@@ -32,7 +32,7 @@
                         </div>
                         <div class="col-lg-6">
                             <ul class="list-group">
-                                <li class="list-group-item bg-primary light text-center">Mapel Saya</li>
+                                <li class="list-group-item bg-primary light text-center">Materi Saya</li>
                                 <?php if ($guru_mapel) : ?>
                                     <?php foreach ($guru_mapel as $gm) : ?>
                                         <?php foreach ($mapel as $mpl) : ?>
@@ -54,10 +54,10 @@
     </div>
     <div class="footer-wrapper">
         <div class="footer-section f-section-1">
-            <p class="">Copyright © 2021 <a target="_blank" href="http://bit.ly/demo-abdul" class="text-primary">Abduloh Malela</a></p>
+            <p class="">Copyright © 2021 <a target="_blank" href="http://www.instagram.com/ikhsa.an" class="text-primary">Ihsan</a></p>
         </div>
         <div class="footer-section f-section-2">
-            <p class="">CBT-MALELA v 1.1</p>
+            <p class="">SIRO</p>
         </div>
     </div>
 </div>

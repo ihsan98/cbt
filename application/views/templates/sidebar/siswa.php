@@ -8,7 +8,7 @@
                         <?php $siswa = $this->db->get_where('siswa', ['id_siswa' => $this->session->userdata('id')])->row(); ?>
                         <img src="<?= base_url('assets/app-assets/user/') . $siswa->avatar; ?>" alt="avatar" class="bg-white">
                         <h6 class=""><?= $siswa->nama_siswa; ?></h6>
-                        <p class="">Siswa CBT-Malela</p>
+                        <p class="">Mahasiswa SIRO</p>
                     </div>
                 </div>
                 <div class="shadow-bottom"></div>

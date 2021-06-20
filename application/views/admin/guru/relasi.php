@@ -36,12 +36,12 @@
             <div class="col-lg-6">
                 <div class="widget shadow p-3">
                     <div class="widget-heading text-center">
-                        <h5 class="text-center">Relasi Guru - Mapel</h5>
+                        <h5 class="text-center">Relasi Dosen - Materi</h5>
                         <form action="<?= base_url('guru_mapel'); ?>" method="POST">
                             <table class="table table-bordered mt-2">
                                 <thead>
                                     <tr>
-                                        <th>Mapel</th>
+                                        <th>Materi</th>
                                         <th>Status</th>
                                     </tr>
                                 </thead>
@@ -67,10 +67,10 @@
     </div>
     <div class="footer-wrapper">
         <div class="footer-section f-section-1">
-            <p class="">Copyright © 2021 <a target="_blank" href="http://bit.ly/demo-abdul">Abduloh Malela</a>, All rights reserved. <a href="https://freepik.com" target="_blank" class="text-primary">Illustration by Freepik</a></p>
+            <p class="">Copyright © 2021 <a target="_blank" href="http://www.instagram.com/ikhsa.an">Ihsan</a>, All rights reserved. <a href="https://freepik.com" target="_blank" class="text-primary">Illustration by Freepik</a></p>
         </div>
         <div class="footer-section f-section-2">
-            <p class="">CBT-MALELA v 1.1</p>
+            <p class="">SIRO</p>
         </div>
     </div>
 </div>

@@ -8,14 +8,14 @@
                         <div class="col-lg-6">
                             <div class="widget-heading">
                                 <h5 class="">Mata Pelajaran</h5>
-                                <a href="javascript:void(0)" class="btn btn-primary mt-3" data-toggle="modal" data-target="#tambah_mapel">Tambah Mapel</a>
+                                <a href="javascript:void(0)" class="btn btn-primary mt-3" data-toggle="modal" data-target="#tambah_mapel">Tambah Materi</a>
                             </div>
                             <div class="table-responsive">
                                 <table id="datatable-table" class="table table-bordered table-striped text-center">
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Mapel</th>
+                                            <th>Judul Materi</th>
                                             <th>Opsi</th>
                                         </tr>
                                     </thead>
@@ -59,10 +59,10 @@
     </div> -->
     <div class="footer-wrapper">
         <div class="footer-section f-section-1">
-            <p class="">Copyright © 2021 <a target="_blank" href="http://bit.ly/demo-abdul">Abduloh Malela</a>, All rights reserved. <a href="https://freepik.com" target="_blank" class="text-primary">Illustration by Freepik</a></p>
+            <p class="">Copyright © 2021 <a target="_blank" href="http://www.instagram.com/ikhsa.an">Ihsan</a>, All rights reserved.</p>
         </div>
         <div class="footer-section f-section-2">
-            <p class="">CBT-MALELA v 1.1</p>
+            <p class="">SIRO</p>
         </div>
     </div>
 </div>
@@ -75,7 +75,7 @@
         <form action="" method="POST">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="tambah_mapelLabel">Tambah Mapel</h5>
+                    <h5 class="modal-title" id="tambah_mapelLabel">Tambah Materi</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         x
                     </button>

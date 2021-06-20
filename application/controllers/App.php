@@ -398,7 +398,7 @@ class App extends CI_Controller
 
                 $this->load->library('email', $config);
 
-                $this->email->from("$email_app->email", 'CBT Malela');
+                $this->email->from("$email_app->email", 'SIRO');   //Ubah
                 $this->email->to($this->input->post('email')[$index]);
 
                 $this->email->subject('Akun CBT-Email');
@@ -406,11 +406,11 @@ class App extends CI_Controller
                     <div style="color: #000; padding: 10px;">
                         <div
                             style="font-family: `Segoe UI`, Tahoma, Geneva, Verdana, sans-serif; font-size: 20px; color: #1C3FAA; font-weight: bold;">
-                            CBT Malela</div>
+                            SIRO</div>
                         <small style="color: #000;">SIRO by Ihsan</small>
                         <br>
                         <p style="font-family: `Segoe UI`, Tahoma, Geneva, Verdana, sans-serif; color: #000;">Hallo ' . $nama . ' <br>
-                            <span style="color: #000;">Admin telah menambahkan anda kedalam aplikasi CBT MALELA</span></p>
+                            <span style="color: #000;">Admin telah menambahkan anda kedalam aplikasi SIRO</span></p>
                         <table style="font-family: `Segoe UI`, Tahoma, Geneva, Verdana, sans-serif; color: #000;">
                             <tr>
                                 <td>NAMA</td>
@@ -599,7 +599,7 @@ class App extends CI_Controller
 
                 $this->load->library('email', $config);
 
-                $this->email->from("$email_app->email", 'CBT Malela');
+                $this->email->from("$email_app->email", 'SIRO'); //Ubah
                 $this->email->to($this->input->post('email')[$index]);
 
                 $this->email->subject('Akun CBT-Email');
@@ -607,11 +607,11 @@ class App extends CI_Controller
                     <div style="color: #000; padding: 10px;">
                         <div
                             style="font-family: `Segoe UI`, Tahoma, Geneva, Verdana, sans-serif; font-size: 20px; color: #1C3FAA; font-weight: bold;">
-                            CBT Malela</div>
+                            SIRO</div>
                         <small style="color: #000;">SIRO By Ihsan</small>
                         <br>
                         <p style="font-family: `Segoe UI`, Tahoma, Geneva, Verdana, sans-serif; color: #000;">Hallo ' . $nama . ' <br>
-                            <span style="color: #000;">Admin telah menambahkan anda kedalam aplikasi CBT MALELA</span></p>
+                            <span style="color: #000;">Admin telah menambahkan anda kedalam aplikasi SIRO</span></p>
                         <table style="font-family: `Segoe UI`, Tahoma, Geneva, Verdana, sans-serif; color: #000;">
                             <tr>
                                 <td>NAMA</td>

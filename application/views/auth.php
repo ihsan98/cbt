@@ -162,7 +162,7 @@
                 <div class="form-container">
                     <div class="form-content">
 
-                        <h1 class="">Log In to <a href=""><span class="brand-name">CBT</span></a></h1>
+                        <h1 class="">Log In to <a href=""><span class="brand-name">SIRO</span></a></h1>
                         <?php $admin = $this->db->get('admin')->result(); ?>
                         <?php if (!$admin) : ?>
                             <p class="signup-link">Admin belum ada. <a href="<?= base_url('auth/install'); ?>">Buat akun Admin dulu</a></p>
@@ -205,7 +205,7 @@
                         <p class="signup-link">
                             Lupa Password? <a href="<?= base_url('auth/recovery') ?>">Klik Disini</a>
                         </p>
-                        <p class="terms-conditions">© 2021 SIO by <a href="https://www.youtube.com/channel/UCvteoPo7Th3Q2Mdi9c8CT1w" target="_blank">Ihsan</a> All Rights Reserved. <a href="https://www.freepik.com/" target="_blank">Illustration by Freepik</a></p>
+                        <p class="terms-conditions">© 2021 SIO by <a href="https://www.youtube.com/channel/UCvteoPo7Th3Q2Mdi9c8CT1w" target="_blank">Ihsan</a> </p>
 
                     </div>
                 </div>
