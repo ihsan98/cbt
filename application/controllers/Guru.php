@@ -679,7 +679,8 @@ class Guru extends CI_Controller
         $crud->set_relation('id_video', 'video', 'judul_video');
         $crud->set_relation('id_siswa', 'siswa', 'nama_siswa');
 
-        $crud->unset_operations();
+        $crud->unset_add();
+        $crud->unset_edit();
         $crud->unset_read();
 		$crud->unset_clone();
 		$crud->unset_export();
