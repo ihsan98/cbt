@@ -7,6 +7,23 @@
             <div class="widget-heading">
               <div class="row">
                 <div class="col-md-8">
+                  <?php
+                    $where = array(
+                      'id_materi' => $materi->id_materi,
+                      'id_video' => $video->id_video,
+                      'id_siswa' => $siswa->id_siswa
+                    );
+
+                    $id_penilaian = 0;
+
+                    $cek_penilaian = $this->db->get_where('penilaian', $where);
+
+                    if($cek_penilaian->num_rows() > 0) {
+                      $penilaian = $cek_penilaian->row();
+
+                      $id_penilaian = $penilaian->id_penilaian;
+                    }
+                  ?>
                   <input type="hidden" id="idMateri" value="<?php echo $materi->id_materi; ?>">
                   <input type="hidden" id="idVideo" value="<?php echo $video->id_video; ?>">
                   <input type="hidden" id="idSiswa" value="<?php echo $siswa->id_siswa; ?>">
@@ -14,17 +31,25 @@
                   <hr>
                   <h5><?php echo $video->judul_video; ?></h5>
                   <p class="text-muted"><?php echo "Terakhir diperbarui " . date('M d, Y H:i A', strtotime($video->terakhir_diperbarui)); ?></p>
-                  <div class="wrap-question">
+                  <div class="wrap-question <?php echo ($cek_penilaian->num_rows() > 0 ? 'show' : ''); ?>">
                     <?php $semua_pertanyaan = $this->db->get_where('pertanyaan', array('id_video' => $video->id_video))->result(); ?>
                     <?php shuffle($semua_pertanyaan); ?>
                     <?php $i=0; ?>
                     <?php foreach($semua_pertanyaan as $pertanyaan) { ?>
+                    <?php
+                      $cek_detail_penilaian = $this->db->get_where('detail_penilaian', array('id_penilaian' => $id_penilaian, 'id_pertanyaan' => $pertanyaan->id_pertanyaan));
+                      $detail_penilaian = array();
+
+                      if($cek_detail_penilaian->num_rows() > 0) {
+                        $detail_penilaian = $cek_detail_penilaian->row_array();
+                      }
+                    ?>
                     <div id="<?php echo "q" . $pertanyaan->id_pertanyaan; ?>" class="question <?php echo ($i === 0 ? 'show' : ''); ?>">
                       <p><?php echo $pertanyaan->judul_pertanyaan; ?></p>
                       <?php $semua_jawaban = $this->db->get_where('jawaban', array('id_pertanyaan' => $pertanyaan->id_pertanyaan))->result(); ?>
                       <?php shuffle($semua_jawaban); ?>
-                      <?php foreach($semua_jawaban as $jawaban) { ?>
-                      <p><input type="radio" name="<?php echo "q" . $pertanyaan->id_pertanyaan; ?>" value="<?php echo $jawaban->id_jawaban; ?>">&nbsp;&nbsp;<?php echo $jawaban->judul_jawaban; ?></p>
+                      <?php  foreach($semua_jawaban as $jawaban) { ?>
+                      <p><input class="answer" data-pertanyaan="<?php echo $pertanyaan->id_pertanyaan; ?>" type="radio" name="<?php echo "q" . $pertanyaan->id_pertanyaan; ?>" value="<?php echo $jawaban->id_jawaban; ?>" <?php echo (!empty($detail_penilaian) && $detail_penilaian['id_jawaban'] == $jawaban->id_jawaban ? 'checked="checked"' : ''); ?>>&nbsp;&nbsp;<?php echo $jawaban->judul_jawaban; ?></p>
                       <?php } ?>
                     </div>
                     <?php $i++; ?>
@@ -151,12 +176,15 @@
       checkKuis = setInterval(function() {
         console.log(Math.round(player.getCurrentTime()) + ":" + _waktu);
 
-        if(Math.round(player.getCurrentTime()) == _waktu) {
-          _show  = true;
+        if(Math.round(player.getCurrentTime()) >= _waktu) {
           pauseVideo();
           clearInterval(checkKuis);
 
-          showKuis();
+          if(_show === false) {
+            showKuis();
+          }
+
+          _show  = true;
         }
       }, 1000)
     }
@@ -186,10 +214,10 @@
     setInterval(function() {
       var _i = 0;
       var _iqs = 0;
-
+      
       $('.question').each(function() {
         if($(this).hasClass('show')) {
-          _iqs = _i; 
+          _iqs = _i;
         }
 
         _i++;
@@ -199,13 +227,57 @@
 
       $('.nav-question ul li').each(function() {
         if(_j === _iqs) {
-          $('.nav-question ul li').removeClass('current');
+          $(this).removeClass('active');
           $(this).addClass('current');
+        } else {
+          var _id_question = $(this).data('q');
+          var _count_checked = 0;
+
+          $('#' + _id_question + ' .answer').each(function() {
+            if($(this).is(':checked')) {
+              _count_checked += 1;
+            }          
+          })
+
+          if(_count_checked > 0) {
+            $(this).addClass('active');
+          }
         }
 
         _j++;
       })
-    })
+    }, 300)
+
+    setInterval(function() {
+      $('.answer').each(function() {
+        var id_materi = $('#idMateri').val();
+        var id_video = $('#idVideo').val();
+        var id_siswa = $('#idSiswa').val();
+        var id_pertanyaan = $(this).data('pertanyaan');
+        var id_jawaban = $(this).val();
+        var status_jawaban = "";
+
+        if($(this).is(':checked')) {
+          status_jawaban = "true";
+        }
+        
+        if($('.wrap-question').hasClass('show')) {
+          $.ajax({
+            method: 'POST',
+            url: '<?php echo site_url('siswa/update_jawaban'); ?>',
+            data: 'id_materi=' + id_materi + '&id_video=' + id_video + '&id_siswa=' + id_siswa + '&id_pertanyaan=' + id_pertanyaan + '&id_jawaban=' + id_jawaban + '&status_jawaban=' + status_jawaban,
+            dataType: 'html',
+            success: function(response) {
+              console.log(id_jawaban);
+
+              if(response == 'hide') {
+                $('.wrap-question').removeClass('show');
+              }
+            }
+          })  
+        }
+      })
+    }, 1500)
 
     $('.nav-question ul li').on('click', (function() {
       var _q = $(this).data('q');

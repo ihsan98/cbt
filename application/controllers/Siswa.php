@@ -716,4 +716,59 @@ class Siswa extends CI_Controller
         redirect('siswa/lihat_essay/' . encrypt_url($ujian->id_ujian) . '/' . encrypt_url($siswa));
     }
     // END UJIAN ESSAY
+
+    public function update_jawaban() {
+        $id_penilaian = 0;
+        $id_materi = $this->input->post('id_materi');
+        $id_video = $this->input->post('id_video');
+        $id_siswa = $this->input->post('id_siswa');
+        $id_pertanyaan = $this->input->post('id_pertanyaan');
+        $id_jawaban = $this->input->post('id_jawaban');
+        $status_jawaban = $this->input->post('status_jawaban');
+
+        $jumlah_pertanyaan = $this->db->get_where('pertanyaan', array('id_video' => $id_video))->num_rows();
+        $jumlah_detik = $jumlah_pertanyaan * 40;
+
+        $where = array(
+            'id_materi' => $id_materi,
+            'id_video' => $id_video,
+            'id_siswa' => $id_siswa
+        );
+
+        $cek_penilaian = $this->db->get_where('penilaian', $where);
+
+        if($cek_penilaian->num_rows() > 0) {
+            $penilaian = $cek_penilaian->row();
+
+            $id_penilaian = $penilaian->id_penilaian;
+        } else {
+            $insert = $this->db->insert('penilaian', $where);
+
+            if($insert) {
+                $id_penilaian = $this->db->insert_id();
+            }
+        }
+
+        if($status_jawaban == 'true') {
+            $cek_detail_penilaian = $this->db->get_where('detail_penilaian', array('id_penilaian' => $id_penilaian, 'id_pertanyaan' => $id_pertanyaan));
+
+            if($cek_detail_penilaian->num_rows() > 0) {
+                $detail_penilaian = $cek_detail_penilaian->row();
+
+                $this->db->update('detail_penilaian', array('id_pertanyaan' => $id_pertanyaan, 'id_jawaban' => $id_jawaban), array('id_detail_penilaian' => $detail_penilaian->id_detail_penilaian));
+            } else {
+                $this->db->insert('detail_penilaian', array('id_penilaian' => $id_penilaian, 'id_pertanyaan' => $id_pertanyaan, 'id_jawaban' => $id_jawaban));
+            }
+        }
+
+        $penilaian = $this->db->get_where('penilaian', array('id_penilaian' => $id_penilaian))->row();
+        $batas_pengerjaan = strtotime($penilaian->tanggal_pengerjaan) + $jumlah_detik;
+        $waktu_sekarang = time();
+
+        if($waktu_sekarang <= $batas_pengerjaan) {
+            echo "show";
+        } else {
+            echo "hide";
+        }
+    }
 }

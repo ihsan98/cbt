@@ -53,7 +53,7 @@
             height: 400px;
             width: calc(100% - 30px);
             opacity: 0.95;
-            z-index: 5;
+            z-index: -1;
         }
 
         .wrap-question.show {
