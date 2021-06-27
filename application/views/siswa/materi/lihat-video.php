@@ -198,6 +198,10 @@
     player.pauseVideo();
   }
 
+  function playVideo() {
+    player.playVideo();
+  }
+
   $(document).ready(function() {
     showKuis = function() {
       var _width_player = $('#player').width();
@@ -272,6 +276,7 @@
 
               if(response == 'hide') {
                 $('.wrap-question').removeClass('show');
+                playVideo();
               }
             }
           })  
