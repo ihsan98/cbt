@@ -40,6 +40,56 @@
                             </div>
                         </a>
                     </li>
+
+                    <!-- Video Materi -->
+                    <li class="menu <?= $menu_video['menu']; ?>">
+                        <a href="<?= base_url('guru/video'); ?>" aria-expanded="<?= $menu_video['expanded']; ?>" class="dropdown-toggle">
+                            <div class="">
+                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
+                                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                                </svg>
+                                <span>Video Materi</span>
+                            </div>
+                        </a>
+                    </li>
+
+                    <li class="menu <?= $menu_pertanyaan['menu']; ?>">
+                        <a href="<?= base_url('guru/pertanyaan'); ?>" aria-expanded="<?= $menu_pertanyaan['expanded']; ?>" class="dropdown-toggle">
+                            <div class="">
+                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
+                                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                                </svg>
+                                <span>Daftar Pertanyaan</span>
+                            </div>
+                        </a>
+                    </li>
+
+                    <li class="menu <?= $menu_jawaban['menu']; ?>">
+                        <a href="<?= base_url('guru/jawaban'); ?>" aria-expanded="<?= $menu_jawaban['expanded']; ?>" class="dropdown-toggle">
+                            <div class="">
+                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
+                                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                                </svg>
+                                <span>Daftar Jawaban</span>
+                            </div>
+                        </a>
+                    </li>
+
+                    <li class="menu <?= $menu_penilaian['menu']; ?>">
+                        <a href="<?= base_url('guru/penilaian'); ?>" aria-expanded="<?= $menu_penilaian['expanded']; ?>" class="dropdown-toggle">
+                            <div class="">
+                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
+                                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                                </svg>
+                                <span>Daftar Penilaian</span>
+                            </div>
+                        </a>
+                    </li>
+
                     <li class="menu <?= $menu_tugas['menu']; ?>">
                         <a href="<?= base_url('guru/tugas'); ?>" aria-expanded="<?= $menu_tugas['expanded']; ?>" class="dropdown-toggle">
                             <div class="">
@@ -52,18 +102,6 @@
                         </a>
                     </li>
 
-                    <!-- Video Materi -->
-                    <li class="menu <?= $menu_materi['menu']; ?>">
-                        <a href="<?= base_url('guru/materi'); ?>" aria-expanded="<?= $menu_materi['expanded']; ?>" class="dropdown-toggle">
-                            <div class="">
-                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
-                                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-                                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-                                </svg>
-                                <span>Video Materi</span>
-                            </div>
-                        </a>
-                    </li>
                     <li class="menu <?= $menu_ujian['menu']; ?>">
                         <a href="<?= base_url('guru/ujian'); ?>" aria-expanded="<?= $menu_ujian['expanded']; ?>" class="dropdown-toggle">
                             <div class="">

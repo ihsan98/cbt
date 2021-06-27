@@ -3,6 +3,13 @@
 
 <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
 <script src="<?= base_url('assets/app-assets/template/cbt-malela/'); ?>assets/js/libs/jquery-3.1.1.min.js"></script>
+
+<?php if(!empty($js_files)) { ?>
+<?php foreach($js_files as $file): ?>
+<script src="<?php echo $file; ?>"></script>
+<?php endforeach; ?>
+<?php } ?>
+
 <script src="<?= base_url('assets/app-assets/template/cbt-malela/'); ?>bootstrap/js/popper.min.js"></script>
 <script src="<?= base_url('assets/app-assets/template/cbt-malela/'); ?>bootstrap/js/bootstrap.min.js"></script>
 <script src="<?= base_url('assets/app-assets/template/cbt-malela/'); ?>plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>

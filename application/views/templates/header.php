@@ -7,6 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
     <title>SIRO by Ihsan</title>
     <link rel="icon" type="image/x-icon" href="<?= base_url('assets/app-assets/img/'); ?>siro.png" />
+    
+    <?php if(!empty($css_files)) { ?>
+    <?php foreach($css_files as $file): ?>
+    <link type="text/css" rel="stylesheet" href="<?php echo $file; ?>" />
+    <?php endforeach; ?>
+    <?php } ?>
+    
     <link href="<?= base_url('assets/app-assets/template/cbt-malela/'); ?>assets/css/loader.css" rel="stylesheet" type="text/css" />
     <script src="<?= base_url('assets/app-assets/template/cbt-malela/'); ?>assets/js/loader.js"></script>
     <!-- BEGIN GLOBAL MANDATORY STYLES -->

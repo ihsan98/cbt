@@ -20,11 +20,23 @@ class Guru extends CI_Controller
             'menu' => 'active',
             'expanded' => 'true'
         ];
-        $data['menu_video'] = [
-            'menu' => 'active',
+        $data['menu_penilaian'] = [
+            'menu' => '',
             'expanded' => 'false',
         ];
         $data['menu_materi'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_video'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_pertanyaan'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_jawaban'] = [
             'menu' => '',
             'expanded' => 'false',
         ];
@@ -62,11 +74,23 @@ class Guru extends CI_Controller
             'menu' => '',
             'expanded' => 'false'
         ];
-        $data['menu_video'] = [
-            'menu' => 'active',
+        $data['menu_penilaian'] = [
+            'menu' => '',
             'expanded' => 'false',
         ];
         $data['menu_materi'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_video'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_pertanyaan'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_jawaban'] = [
             'menu' => '',
             'expanded' => 'false',
         ];
@@ -172,13 +196,25 @@ class Guru extends CI_Controller
             'menu' => '',
             'expanded' => 'false'
         ];
-        $data['menu_video'] = [
-            'menu' => 'active',
+        $data['menu_penilaian'] = [
+            'menu' => '',
             'expanded' => 'false',
         ];
         $data['menu_materi'] = [
             'menu' => 'active',
             'expanded' => 'true',
+        ];
+        $data['menu_video'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_pertanyaan'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_jawaban'] = [
+            'menu' => '',
+            'expanded' => 'false',
         ];
         $data['menu_tugas'] = [
             'menu' => '',
@@ -389,13 +425,25 @@ class Guru extends CI_Controller
             'menu' => '',
             'expanded' => 'false'
         ];
-        $data['menu_video'] = [
-            'menu' => 'active',
+        $data['menu_penilaian'] = [
+            'menu' => '',
             'expanded' => 'false',
         ];
         $data['menu_materi'] = [
-            'menu' => 'active',
-            'expanded' => 'true',
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_video'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_pertanyaan'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_jawaban'] = [
+            'menu' => '',
+            'expanded' => 'false',
         ];
         $data['menu_tugas'] = [
             'menu' => '',
@@ -563,20 +611,262 @@ class Guru extends CI_Controller
     }
 
     // END MATERI
-
-    // START video
-    public function video()
+    public function penilaian()
     {
+        $this->load->library('grocery_CRUD');
+
         // MENU DATA
         $data['dashboard'] = [
             'menu' => '',
             'expanded' => 'false'
         ];
-        $data['menu_materi'] = [
+        $data['menu_penilaian'] = [
             'menu' => 'active',
+            'expanded' => 'true',
+        ];
+        $data['menu_materi'] = [
+            'menu' => '',
             'expanded' => 'false',
         ];
         $data['menu_video'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_pertanyaan'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_jawaban'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_tugas'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_ujian'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_profile'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+
+        // Grocery CRUD
+        $crud = new grocery_CRUD();
+        $state = $crud->getState();
+        $state_info = $crud->getStateInfo();
+
+        $crud->set_language('indonesian');
+		$crud->set_theme('datatables');
+		$crud->set_table('penilaian');
+		$crud->set_subject('Penilaian');
+		$crud->columns('id_materi', 'id_video', 'id_siswa', 'jumlah_pertanyaan', 'benar', 'salah', 'nilai');
+
+        $crud->callback_column('jumlah_pertanyaan', array($this, 'column_pertanyaan'));
+        $crud->callback_column('benar', array($this, 'column_benar'));
+        $crud->callback_column('salah', array($this, 'column_salah'));
+        $crud->callback_column('nilai', array($this, 'column_nilai'));
+
+        $crud->display_as('id_materi', 'Materi');
+        $crud->display_as('id_video', 'Video');
+        $crud->display_as('id_siswa', 'Siswa');
+
+        $crud->field_type('waktu_kuis', 'integer');
+
+        $crud->set_relation('id_materi', 'materi', 'nama_materi');
+        $crud->set_relation('id_video', 'video', 'judul_video');
+        $crud->set_relation('id_siswa', 'siswa', 'nama_siswa');
+
+        $crud->unset_operations();
+        $crud->unset_read();
+		$crud->unset_clone();
+		$crud->unset_export();
+		$crud->unset_print();
+		$crud->unset_bootstrap();
+
+		$output = $crud->render();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar/guru', $data);
+        $this->load->view('guru/video/list', (array) $output);
+        $this->load->view('templates/footer');
+    }
+
+    // START video
+    public function video()
+    {
+        $this->load->library('grocery_CRUD');
+
+        // MENU DATA
+        $data['dashboard'] = [
+            'menu' => '',
+            'expanded' => 'false'
+        ];
+        $data['menu_penilaian'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_materi'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_video'] = [
+            'menu' => 'active',
+            'expanded' => 'true',
+        ];
+        $data['menu_pertanyaan'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_jawaban'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_tugas'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_ujian'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_profile'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+
+        // Grocery CRUD
+        $crud = new grocery_CRUD();
+        $state = $crud->getState();
+        $state_info = $crud->getStateInfo();
+
+        $crud->set_language('indonesian');
+		$crud->set_theme('datatables');
+		$crud->set_table('video');
+		$crud->set_subject('Video');
+		$crud->columns('id_materi', 'judul_video', 'kode_video', 'deskripsi_video', 'waktu_kuis');
+
+		$crud->fields(array('id_materi', 'judul_video', 'kode_video', 'deskripsi_video', 'waktu_kuis'));
+		$crud->required_fields(array('id_materi', 'judul_video', 'kode_video', 'deskripsi_video', 'waktu_kuis'));
+
+        $crud->field_type('waktu_kuis', 'integer');
+
+        $crud->set_relation('id_materi', 'materi', 'nama_materi');
+
+        $crud->unset_read();
+		$crud->unset_clone();
+		$crud->unset_export();
+		$crud->unset_print();
+		$crud->unset_bootstrap();
+
+		$output = $crud->render();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar/guru', $data);
+        $this->load->view('guru/video/list', (array) $output);
+        $this->load->view('templates/footer');
+    }
+
+    public function pertanyaan()
+    {
+        $this->load->library('grocery_CRUD');
+
+        // MENU DATA
+        $data['dashboard'] = [
+            'menu' => '',
+            'expanded' => 'false'
+        ];
+        $data['menu_penilaian'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_materi'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_video'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_pertanyaan'] = [
+            'menu' => 'active',
+            'expanded' => 'true',
+        ];
+        $data['menu_jawaban'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_tugas'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_ujian'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_profile'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+
+        // Grocery CRUD
+        $crud = new grocery_CRUD();
+        $state = $crud->getState();
+        $state_info = $crud->getStateInfo();
+
+        $crud->set_language('indonesian');
+		$crud->set_theme('datatables');
+		$crud->set_table('pertanyaan');
+		$crud->set_subject('Pertanyaan');
+		$crud->columns('id_video', 'judul_pertanyaan');
+
+		$crud->fields(array('id_video', 'judul_pertanyaan'));
+		$crud->required_fields(array('id_video', 'judul_pertanyaan'));
+
+        $crud->set_relation('id_video', 'video', 'judul_video');
+
+        $crud->unset_read();
+		$crud->unset_clone();
+		$crud->unset_export();
+		$crud->unset_print();
+		$crud->unset_bootstrap();
+
+		$output = $crud->render();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar/guru', $data);
+        $this->load->view('guru/video/list', (array) $output);
+        $this->load->view('templates/footer');
+    }
+
+    public function jawaban()
+    {
+        $this->load->library('grocery_CRUD');
+
+        // MENU DATA
+        $data['dashboard'] = [
+            'menu' => '',
+            'expanded' => 'false'
+        ];
+        $data['menu_penilaian'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_materi'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_video'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_pertanyaan'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_jawaban'] = [
             'menu' => 'active',
             'expanded' => 'true',
         ];
@@ -593,193 +883,36 @@ class Guru extends CI_Controller
             'expanded' => 'false',
         ];
 
-        $data['video'] = $this->db->get_where('video', ['guru' => $this->session->userdata('id')])->result();
-        $data['mapel'] = $this->db->get('mapel')->result();
-        $data['kelas'] = $this->db->get('kelas')->result();
+        // Grocery CRUD
+        $crud = new grocery_CRUD();
+        $state = $crud->getState();
+        $state_info = $crud->getStateInfo();
 
-        $data['guru_kelas'] = $this->db->get_where('guru_kelas', ['guru' => $this->session->userdata('id')])->result();
-        $data['guru_mapel'] = $this->db->get_where('guru_mapel', ['guru' => $this->session->userdata('id')])->result();
+        $crud->set_language('indonesian');
+		$crud->set_theme('datatables');
+		$crud->set_table('jawaban');
+		$crud->set_subject('Jawaban');
+		$crud->columns('id_pertanyaan', 'judul_jawaban', 'status_jawaban');
 
-        $this->form_validation->set_rules('nama_video', 'Nama video', 'required');
-        $this->form_validation->set_rules('mapel', 'Mapel', 'required');
-        $this->form_validation->set_rules('kelas', 'Kelas', 'required');
-        $this->form_validation->set_rules('text_video', 'teks video', 'required');
+		$crud->fields(array('id_pertanyaan', 'judul_jawaban', 'status_jawaban'));
+		$crud->required_fields(array('id_pertanyaan', 'judul_jawaban', 'status_jawaban'));
 
-        if ($this->form_validation->run() == false) {
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebar/guru', $data);
-            $this->load->view('guru/video/list', $data);
-            $this->load->view('templates/footer');
-        } else {
-            $data_video = [
-                'kode_video' => $this->input->post('kode_video'),
-                'nama_video' => $this->input->post('nama_video'),
-                'guru' => $this->session->userdata('id'),
-                'mapel' => $this->input->post('mapel'),
-                'kelas' => $this->input->post('kelas'),
-                'text_video' => htmlspecialchars($this->input->post('text_video', true)),
-                'date_created' => time()
-            ];
-            $mapel = $this->db->get_where('mapel', ['id_mapel' => $this->input->post('mapel')])->row();
+        $crud->field_type('status_jawaban', 'true_false', array('Salah', 'Benar'));
 
-            $siswa = $this->db->get_where('siswa', ['kelas' => $this->input->post('kelas')])->result();
+        $crud->set_relation('id_pertanyaan', 'pertanyaan', 'judul_pertanyaan');
 
-            // Kirim Email Ke siswa
-            $email_app = $this->db->get('admin')->row();
-            foreach ($siswa as $s) {
-                $config = [
-                    'protocol' => 'smtp',
-                    'smtp_host' => 'ssl://smtp.googlemail.com',
-                    'smtp_user' => "$email_app->email",
-                    'smtp_pass' => "$email_app->pm",
-                    'smtp_port' => 465,
-                    'mailtype' => 'html',
-                    'charset' => 'utf-8',
-                    'newline' => "\r\n"
-                ];
-                $this->email->initialize($config);
+        $crud->unset_read();
+		$crud->unset_clone();
+		$crud->unset_export();
+		$crud->unset_print();
+		$crud->unset_bootstrap();
 
-                $this->email->set_newline("\r\n");
+		$output = $crud->render();
 
-                $this->load->library('email', $config);
-
-                $this->email->from("$email_app->email", 'SIRO');
-                $this->email->to($s->email);
-
-                $this->email->subject('video');
-                $this->email->message('
-                    <div style="color: #000; padding: 10px;">
-                        <div
-                            style="font-family: `Segoe UI`, Tahoma, Geneva, Verdana, sans-serif; font-size: 20px; color: #1C3FAA; font-weight: bold;">
-                            SIRO</div>
-                        <small style="color: #000;">SIRO by Ihsan</small>
-                        <br>
-                        <p style="font-family: `Segoe UI`, Tahoma, Geneva, Verdana, sans-serif; color: #000;">Hallo ' . $s->nama_siswa . ' <br>
-                            <span style="color: #000;">' . $this->session->userdata('nama') . ' memposting video baru</span></p>
-                        <table style="font-family: `Segoe UI`, Tahoma, Geneva, Verdana, sans-serif; color: #000;">
-                            <tr>
-                                <td>videoal</td>
-                                <td> : ' . $this->input->post('nama_video') . '</td>
-                            </tr>
-                            <tr>
-                                <td>Mata Pelajaran</td>
-                                <td> : ' . $mapel->nama_mapel . '</td>
-                            </tr>
-                        </table>
-                        <br>
-                        <a href="' . base_url('auth') . '"
-                            style="display: inline-block; width: 100px; height: 30px; background: #1C3FAA; color: #fff; text-decoration: none; border-radius: 5px; text-align: center; line-height: 30px; font-family: `Segoe UI`, Tahoma, Geneva, Verdana, sans-serif;">Sign
-                            In
-                            Now!</a>
-                        </div>
-                ');
-
-                if (!$this->email->send()) {
-                    echo $this->email->print_debugger();
-                    die();
-                }
-            }
-            $this->db->insert('video', $data_video);
-
-            if ($_FILES['file_video']) {
-
-                // Hitung Jumlah File/Gambar yang dipilih
-                $jumlahData = count($_FILES['file_video']['name']);
-
-                // Lakukan Perulangan dengan maksimal ulang Jumlah File yang dipilih
-                for ($i = 0; $i < $jumlahData; $i++) :
-
-                    // Inisialisasi Nama,Tipe,Dll.
-                    $_FILES['file']['name']     = $_FILES['file_video']['name'][$i];
-                    $_FILES['file']['type']     = $_FILES['file_video']['type'][$i];
-                    $_FILES['file']['tmp_name'] = $_FILES['file_video']['tmp_name'][$i];
-                    $_FILES['file']['size']     = $_FILES['file_video']['size'][$i];
-
-                    // Konfigurasi Upload
-                    $config['upload_path']          = './assets/app-assets/file/';
-                    $config['allowed_types']        = 'gif|jpg|png|pdf|doc|docx|ppt|pptx|rar|zip|xlsx|php|js|html|css|txt|iso';
-
-                    // Memanggil Library Upload dan Setting Konfigurasi
-                    $this->load->library('upload', $config);
-                    $this->upload->initialize($config);
-
-                    if ($this->upload->do_upload('file')) { // Jika Berhasil Upload
-
-                        $fileData = $this->upload->data(); // Lakukan Upload Data
-
-                        // Membuat Variable untuk dimasukkan ke Database
-                        $uploadData[$i]['kode_file'] = $this->input->post('kode_video');
-                        $uploadData[$i]['nama_file'] = $fileData['file_name'];
-                    }
-
-                endfor; // Penutup For
-
-                if ($uploadData !== null) { // Jika Berhasil Upload
-                    $this->db->insert_batch('file', $uploadData);
-                }
-            }
-
-            if ($_FILES['video_video']) {
-                // Hitung Jumlah File/Gambar yang dipilih
-                $jumlahData_video = count($_FILES['video_video']['name']);
-
-                // Lakukan Perulangan dengan maksimal ulang Jumlah File yang dipilih
-                for ($i = 0; $i < $jumlahData_video; $i++) :
-
-                    // Inisialisasi Nama,Tipe,Dll.
-                    $_FILES['file']['name']     = $_FILES['video_video']['name'][$i];
-                    $_FILES['file']['type']     = $_FILES['video_video']['type'][$i];
-                    $_FILES['file']['tmp_name'] = $_FILES['video_video']['tmp_name'][$i];
-                    $_FILES['file']['size']     = $_FILES['video_video']['size'][$i];
-
-                    // Konfigurasi Upload
-                    $config_video['upload_path']          = './assets/app-assets/file/';
-                    $config_video['allowed_types']        = 'mp4|MP4|3gp|3GP|avi|AVI|mkv|MKV|mpeg|MPEG|wmp|WMP';
-
-                    // Memanggil Library Upload dan Setting Konfigurasi
-                    $this->load->library('upload', $config_video);
-                    $this->upload->initialize($config_video);
-
-                    if ($this->upload->do_upload('file')) { // Jika Berhasil Upload
-
-                        $fileData_video = $this->upload->data(); // Lakukan Upload Data
-
-                        // Membuat Variable untuk dimasukkan ke Database
-                        $uploadData_video[$i]['kode_file'] = $this->input->post('kode_video');
-                        $uploadData_video[$i]['nama_file'] = $fileData_video['file_name'];
-                    }
-
-                endfor; // Penutup For
-
-                if ($uploadData_video !== null) { // Jika Berhasil Upload
-                    $this->db->insert_batch('file', $uploadData_video);
-                }
-            }
-
-            $siswa_video = [];
-            $index_siswa_video = 0;
-            foreach ($siswa as $s2) {
-                array_push($siswa_video, array(
-                    'video' => $this->input->post('kode_video'),
-                    'kelas' => $this->input->post('kelas'),
-                    'mapel' => $this->input->post('mapel'),
-                    'siswa' => $s2->id_siswa,
-                    'dilihat' => 0
-                ));
-            }
-
-            $this->db->insert_batch('video_siswa', $siswa_video);
-
-            $this->session->set_flashdata('pesan', "
-                        swal({
-                            title: 'Berhasil!',
-                            text: 'video telah dibuat',
-                            type: 'success',
-                            padding: '2em'
-                            });
-                        ");
-            redirect('guru/video?pesan=success');
-        }
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar/guru', $data);
+        $this->load->view('guru/video/list', (array) $output);
+        $this->load->view('templates/footer');
     }
 
     public function lihat_video($data_id_video, $data_id_guru)
@@ -789,13 +922,25 @@ class Guru extends CI_Controller
             'menu' => '',
             'expanded' => 'false'
         ];
-        $data['menu_video'] = [
-            'menu' => 'active',
+        $data['menu_penilaian'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_materi'] = [
+            'menu' => '',
             'expanded' => 'false',
         ];
         $data['menu_video'] = [
-            'menu' => 'active',
-            'expanded' => 'true',
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_pertanyaan'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_jawaban'] = [
+            'menu' => '',
+            'expanded' => 'false',
         ];
         $data['menu_tugas'] = [
             'menu' => '',
@@ -971,11 +1116,23 @@ class Guru extends CI_Controller
             'menu' => '',
             'expanded' => 'false'
         ];
-        $data['menu_video'] = [
-            'menu' => 'active',
+        $data['menu_penilaian'] = [
+            'menu' => '',
             'expanded' => 'false',
         ];
         $data['menu_materi'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_video'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_pertanyaan'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_jawaban'] = [
             'menu' => '',
             'expanded' => 'false',
         ];
@@ -1293,11 +1450,23 @@ class Guru extends CI_Controller
             'menu' => '',
             'expanded' => 'false'
         ];
-        $data['menu_video'] = [
-            'menu' => 'active',
+        $data['menu_penilaian'] = [
+            'menu' => '',
             'expanded' => 'false',
         ];
         $data['menu_materi'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_video'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_pertanyaan'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_jawaban'] = [
             'menu' => '',
             'expanded' => 'false',
         ];
@@ -1344,11 +1513,23 @@ class Guru extends CI_Controller
             'menu' => '',
             'expanded' => 'false'
         ];
-        $data['menu_video'] = [
-            'menu' => 'active',
+        $data['menu_penilaian'] = [
+            'menu' => '',
             'expanded' => 'false',
         ];
         $data['menu_materi'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_video'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_pertanyaan'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_jawaban'] = [
             'menu' => '',
             'expanded' => 'false',
         ];
@@ -1453,11 +1634,23 @@ class Guru extends CI_Controller
             'menu' => '',
             'expanded' => 'false'
         ];
-        $data['menu_video'] = [
-            'menu' => 'active',
+        $data['menu_penilaian'] = [
+            'menu' => '',
             'expanded' => 'false',
         ];
         $data['menu_materi'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_video'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_pertanyaan'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_jawaban'] = [
             'menu' => '',
             'expanded' => 'false',
         ];
@@ -1496,11 +1689,23 @@ class Guru extends CI_Controller
             'menu' => '',
             'expanded' => 'false'
         ];
-        $data['menu_video'] = [
-            'menu' => 'active',
+        $data['menu_penilaian'] = [
+            'menu' => '',
             'expanded' => 'false',
         ];
         $data['menu_materi'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_video'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_pertanyaan'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_jawaban'] = [
             'menu' => '',
             'expanded' => 'false',
         ];
@@ -1857,11 +2062,23 @@ class Guru extends CI_Controller
             'menu' => '',
             'expanded' => 'false'
         ];
-        $data['menu_video'] = [
-            'menu' => 'active',
+        $data['menu_penilaian'] = [
+            'menu' => '',
             'expanded' => 'false',
         ];
         $data['menu_materi'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_video'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_pertanyaan'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_jawaban'] = [
             'menu' => '',
             'expanded' => 'false',
         ];
@@ -1921,11 +2138,23 @@ class Guru extends CI_Controller
             'menu' => '',
             'expanded' => 'false'
         ];
-        $data['menu_video'] = [
-            'menu' => 'active',
+        $data['menu_penilaian'] = [
+            'menu' => '',
             'expanded' => 'false',
         ];
         $data['menu_materi'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_video'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_pertanyaan'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_jawaban'] = [
             'menu' => '',
             'expanded' => 'false',
         ];
@@ -1972,11 +2201,23 @@ class Guru extends CI_Controller
             'menu' => '',
             'expanded' => 'false'
         ];
-        $data['menu_video'] = [
-            'menu' => 'active',
+        $data['menu_penilaian'] = [
+            'menu' => '',
             'expanded' => 'false',
         ];
         $data['menu_materi'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_video'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_pertanyaan'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_jawaban'] = [
             'menu' => '',
             'expanded' => 'false',
         ];
@@ -2154,11 +2395,23 @@ class Guru extends CI_Controller
             'menu' => '',
             'expanded' => 'false'
         ];
-        $data['menu_video'] = [
-            'menu' => 'active',
+        $data['menu_penilaian'] = [
+            'menu' => '',
             'expanded' => 'false',
         ];
         $data['menu_materi'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_video'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_pertanyaan'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_jawaban'] = [
             'menu' => '',
             'expanded' => 'false',
         ];
@@ -2219,11 +2472,23 @@ class Guru extends CI_Controller
             'menu' => '',
             'expanded' => 'false'
         ];
-        $data['menu_video'] = [
-            'menu' => 'active',
+        $data['menu_penilaian'] = [
+            'menu' => '',
             'expanded' => 'false',
         ];
         $data['menu_materi'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_video'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_pertanyaan'] = [
+            'menu' => '',
+            'expanded' => 'false',
+        ];
+        $data['menu_jawaban'] = [
             'menu' => '',
             'expanded' => 'false',
         ];
@@ -2311,6 +2576,59 @@ class Guru extends CI_Controller
         redirect('guru/ujian');
     }
 
+    public function column_pertanyaan($value, $row) {
+        $id_video = $row->id_video;
+        $jumlah_pertanyaan = $this->db->get_where('pertanyaan', array('id_video' => $id_video))->num_rows();
+        
+        return $jumlah_pertanyaan;
+    }
 
+    public function column_benar($value, $row) {
+        $id_penilaian = $row->id_penilaian;
+        $id_video = $row->id_video;
+        $jumlah_pertanyaan = $this->db->get_where('pertanyaan', array('id_video' => $id_video))->num_rows();
+        $jumlah_benar = 0;
+
+        $detail_penilaian = $this->db->get_where('v_detail_penilaian', array('id_penilaian' => $id_penilaian))->result();
+        foreach($detail_penilaian as $row) {
+            if($row->status_jawaban == 1 || $row->status_jawaban == '1') {
+                $jumlah_benar += 1;
+            }
+        }
+
+        return $jumlah_benar;
+    }
+
+    public function column_salah($value, $row) {
+        $id_penilaian = $row->id_penilaian;
+        $id_video = $row->id_video;
+        $jumlah_pertanyaan = $this->db->get_where('pertanyaan', array('id_video' => $id_video))->num_rows();
+        $jumlah_benar = 0;
+
+        $detail_penilaian = $this->db->get_where('v_detail_penilaian', array('id_penilaian' => $id_penilaian))->result();
+        foreach($detail_penilaian as $row) {
+            if($row->status_jawaban == 1 || $row->status_jawaban == '1') {
+                $jumlah_benar += 1;
+            }
+        }
+
+        return ($jumlah_pertanyaan - $jumlah_benar);
+    }
+
+    public function column_nilai($value, $row) {
+        $id_penilaian = $row->id_penilaian;
+        $id_video = $row->id_video;
+        $jumlah_pertanyaan = $this->db->get_where('pertanyaan', array('id_video' => $id_video))->num_rows();
+        $jumlah_benar = 0;
+
+        $detail_penilaian = $this->db->get_where('v_detail_penilaian', array('id_penilaian' => $id_penilaian))->result();
+        foreach($detail_penilaian as $row) {
+            if($row->status_jawaban == 1 || $row->status_jawaban == '1') {
+                $jumlah_benar += 1;
+            }
+        }
+
+        return ($jumlah_benar/ $jumlah_pertanyaan * 100);
+    }
     // END UJIAN =================================================
 }
