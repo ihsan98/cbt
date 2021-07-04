@@ -40,6 +40,7 @@ class Siswa extends CI_Controller
             'siswa' => $this->session->userdata('id'),
             'date_send' => null
         ];
+        $data['nilai_akhir'] = $this->get_nilai_akhir();
         $data['tugas_siswa'] = $this->db->get_where('tugas_siswa', $tugas_siswa_where)->result();
         $data['materi_siswa'] = $this->db->get_where('materi_siswa', ['siswa' => $this->session->userdata('id')])->result();
         $data['kelas'] = $this->db->get('kelas')->result();
@@ -770,5 +771,43 @@ class Siswa extends CI_Controller
         } else {
             echo "hide";
         }
+    }
+    
+    public function get_nilai_akhir() {
+        $jumlah_pertanyaan = 0;
+        $jumlah_salah = 0;
+        $jumlah_benar = 0;
+
+        // Jumlah pertanyaan
+        $id_siswa = $this->session->userdata('id');
+        $siswa = $this->db->get_where('siswa', array('id_siswa' => $id_siswa))->row();
+
+        $semua_materi = $this->db->get_where('materi', array('kelas' => $siswa->kelas))->result();
+        foreach($semua_materi as $materi) {
+            $semua_video = $this->db->get_where('v_video', array('id_materi' => $materi->id_materi))->result();
+
+            foreach($semua_video as $video) {
+                $semua_pertanyaan = $this->db->get_where('pertanyaan', array('id_video' => $video->id_video))->num_rows();
+
+                $jumlah_pertanyaan += $semua_pertanyaan;
+            }
+        }
+
+        // Jumlah benar
+        $semua_penilaian = $this->db->get_where('penilaian', array('id_siswa' => $id_siswa))->result();
+
+        foreach($semua_penilaian as $penilaian) {
+            $detail_penilaian = $this->db->get_where('v_detail_penilaian', array('id_penilaian' => $penilaian->id_penilaian))->result();
+
+            foreach($detail_penilaian as $dp) {
+                if($dp->status_jawaban == '1') {
+                    $jumlah_benar += 1;
+                } else {
+                    $jumlah_salah += 1;
+                }
+            }
+        }
+
+        return $jumlah_benar / $jumlah_pertanyaan * 100;
     }
 }

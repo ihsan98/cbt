@@ -249,16 +249,8 @@
                         </div>
                         <div class="w-content">
                             <div class="">
-                                <p class="task-left">
-                                    <?php $siswa = $this->db->get_where('siswa', ['id_siswa' => $this->session->userdata('id')])->row(); ?>
-                                    <?php
-                                    $this->db->select_avg('nilai');
-                                    $this->db->where('siswa', $siswa->id_siswa);
-                                    $rata_rata = $this->db->get('tugas_siswa')->row();
-                                    ?>
-                                    <?= ($rata_rata->nilai / 10); ?>
-                                </p>
-                                <p class="task-completed"><span><?= ($rata_rata->nilai / 10); ?> Adalah Nilai Rata-Rata Kamu</span></p>
+                                <p class="task-left"><?php echo $nilai_akhir; ?></p>
+                                <p class="task-completed"><span><?php echo ($nilai_akhir >= 75 ? 'Lulus' : 'Tidak Lulus'); ?></span></p>
                             </div>
                         </div>
                     </div>

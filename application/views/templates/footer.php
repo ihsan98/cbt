@@ -524,6 +524,52 @@
     })
 </script>
 
+<script>
+    $(document).ready(function() {
+        if($('.wrap-chat').length) {
+            setInterval(function() {
+                var _kode_disqus = $('#kode_disqus').val();
+
+                $.ajax({
+                    method: 'POST',
+                    url: '<?php echo site_url('disqus/get_chat'); ?>',
+                    data: 'kode_disqus=' + _kode_disqus,
+                    dataType: 'html',
+                    processData: false,
+                    success: function(response) {
+                        if(response === 'false') {
+                            document.location.href = "";
+                        } else if(response !== '') {
+                            $('.wrap-chat ol').append(response);
+                        }
+                    }
+                })
+            }, 1000)
+        }
+
+        if($('#kirim-pesan').length) {
+            $('#kirim-pesan').on('submit', (function(e) {
+                e.preventDefault();
+
+                var _url = $(this).attr('action');
+                var _kode_disqus = $('#kode_disqus').val();
+                var _isi_pesan = $('#isi_pesan').val();
+
+                $.ajax({
+                    method: 'POST',
+                    url: _url,
+                    data: 'kode_disqus=' + _kode_disqus + '&isi_pesan=' + _isi_pesan,
+                    dataType: 'html',
+                    processData: false,
+                    success: function(response) {
+                        // No action
+                    }
+                })
+            }))
+        }
+    })
+</script>
+
 </body>
 
 
