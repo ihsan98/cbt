@@ -750,11 +750,18 @@ class Guru extends CI_Controller
 		$crud->columns('id_materi', 'judul_video', 'kode_video', 'deskripsi_video', 'waktu_kuis');
 
 		$crud->fields(array('id_materi', 'judul_video', 'kode_video', 'deskripsi_video', 'waktu_kuis'));
-		$crud->required_fields(array('id_materi', 'judul_video', 'kode_video', 'deskripsi_video', 'waktu_kuis'));
+		$crud->required_fields(array('id_materi', 'judul_video', 'kode_video', 'deskripsi_video'));
 
         $crud->field_type('waktu_kuis', 'integer');
 
+        $crud->callback_edit_field('waktu_kuis', function ($value, $primary_key) {
+            return '<input type="number" min="0" step="1" value="'.($value == '3600' ? '' : $value).'" name="waktu_kuis">';
+        });
+
         $crud->set_relation('id_materi', 'materi', 'nama_materi');
+
+        $crud->callback_before_insert(array($this,'video_bi_callback'));
+        $crud->callback_before_update(array($this,'video_bu_callback'));
 
         $crud->unset_read();
 		$crud->unset_clone();
@@ -768,6 +775,22 @@ class Guru extends CI_Controller
         $this->load->view('templates/sidebar/guru', $data);
         $this->load->view('guru/video/list', (array) $output);
         $this->load->view('templates/footer');
+    }
+
+    function video_bi_callback($post_array) {
+        if($post_array['waktu_kuis'] == '') {
+            unset($post_array['waktu_kuis']);
+        }
+
+        return $post_array;
+    }
+
+    function video_bu_callback($post_array, $primary_key) {
+        if($post_array['waktu_kuis'] == '') {
+            unset($post_array['waktu_kuis']);
+        }
+
+        return $post_array;
     }
 
     public function pertanyaan()
